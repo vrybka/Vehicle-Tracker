@@ -5,7 +5,7 @@
 The Vehicle Service Records Tracking application is a software solution designed to help vehicle owners and enthusiasts efficiently manage their car maintenance records and track their vehicle's history. 
 This program eases the process of recording and managing maintenance activities, providing a digital garage for all your vehicle-related data.
 
-## Features
+# Features
 #### Vehicle Management 
 - Add/Edit/Delete Vehicles: Users can effortlessly add new vehicles to their digital garage, including details like make, model, year, and picture.
 #### Records Management 
