@@ -1,0 +1,56 @@
+﻿@model VehicleTracker.Models.RecordsViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    var category = ViewBag.Categories;
+    var carid = Context.Session.GetInt32("carid");
+}
+
+<h1>Create</h1>
+<h4>Records </h4>
+<hr />
+
+<form method="post" action="Create">
+    <div class="mb-3">
+        <label for="" class="form-label">Date</label>
+        <input type="date" class="form-control" asp-for="Date">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Mileage</label>
+        <input type="number" class="form-control" asp-for="Mileage">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Notes</label>
+        <input type="text" class="form-control" asp-for="Notes">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Cost</label>
+        <input type="number" class="form-control" asp-for="Cost">
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Category</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="@Model.Categories"></select>
+        @*         <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(category))"></select> *@
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+<div>
+    <a asp-controller="Records" asp-action="Index" asp-route-id="@carid">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
