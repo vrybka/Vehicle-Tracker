@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Schema;
 using VehicleTracker.Models;
 
 namespace VehicleTracker.Controllers
@@ -26,6 +28,12 @@ namespace VehicleTracker.Controllers
                 HttpContext.Session.SetString("VehicleNotes", notes);
             }
 
+            //else
+            //{
+            //    HttpContext.Session.SetString("VehicleNotes", "Nothing here yet..");
+            //}
+
+
             HttpContext.Session.SetInt32("carid", (int)id);
 
             if (id == null || carRep.Records == null)
@@ -36,13 +44,15 @@ namespace VehicleTracker.Controllers
 
             var records = from b in carRep.Records.Where(m => m.VehicleId == id).Where(m => category == null || m.CategoryId == category) select b;
 
-
-
+ 
             if (!String.IsNullOrEmpty(SearchString))
             {
                 records = records.Where(b => b.Name.Contains(SearchString) || b.Notes.Contains(SearchString));
             }
 
+            // Calculate total cost
+            double totalCost = (double)records.Sum(m => m.Cost);
+            HttpContext.Session.SetString("TotalCost", totalCost.ToString("C2"));
 
 
             ViewBag.SortParam = String.IsNullOrEmpty(SortOrder) ? "asc" : "";

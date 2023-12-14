@@ -22,6 +22,8 @@ namespace VehicleTracker.Models
         // establishing one-to-many relationship between vehicles and records 
         public ICollection<Records>? Records { get; set; }
 
+
+        //public IFormFile? coverImage { get; set; }
         public string? Image { get; set; }
     }
 }

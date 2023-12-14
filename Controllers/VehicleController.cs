@@ -62,9 +62,31 @@ namespace VehicleTracker.Controllers
         public async Task<IActionResult> Create([Bind("Id,Make,CarModel,Year")] Vehicle vehicle, IFormFile? file)
         {
 
+            //var filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            //var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", file.FileName);
+            //using (System.IO.Stream stream = new FileStream(path, FileMode.Create))
+            //{
+            //    await file.CopyToAsync(stream);
+            //}
+
+            ///////
+
+            //await _fileupload.UploadFile(file);
+
+
+            //////
+
             if (ModelState.IsValid)
             {
-
+                //string imgtxt = Path.GetExtension(file.FileName);
+                //if (imgtxt.Equals(".jpg") || imgtxt.Equals(".JPG"))
+                //{
+                //    await _fileupload.UploadFile(file);
+                //    //var path = Path.Combine(_web.WebRootPath, "Images", file.FileName);
+                //    //var stream = new FileStream(path, FileMode.Create);
+                //    //await file.CopyToAsync(stream);
+                //    vehicle.Image = file.FileName;
+                //}
 
                 if (file != null)
                 {
@@ -77,6 +99,17 @@ namespace VehicleTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+
+            //__ORIGINAL
+
+            //if (ModelState.IsValid)
+            //{
+
+            //    _context.Add(vehicle);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
 
             return View(vehicle);
         }
@@ -200,6 +233,7 @@ namespace VehicleTracker.Controllers
         public async Task<IActionResult> EditNotes(int id, string notes)
         {
 
+            //ViewData["VehicleNotes"] = notes;
 
             var car = _context.Vehicles.FirstOrDefault(m => m.Id == id);
             car.Notes = notes;
@@ -207,10 +241,9 @@ namespace VehicleTracker.Controllers
 
             HttpContext.Session.SetString("VehicleNotes", notes);
 
-
             _context.Update(car);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Records", new { id = car.Id });
+            return RedirectToAction("Index", "Records", new { id = car.Id, notes = notes });
         }
     }
 }

@@ -6,48 +6,47 @@
     var carid = Context.Session.GetInt32("carid");
 }
 
-<h1>Create</h1>
-<h4>Records </h4>
-<hr />
-
-<form method="post" action="Create">
-    <div class="mb-3">
-        <label for="" class="form-label">Date</label>
-        <input type="date" class="form-control" asp-for="Date">
+<html>
+<body class=" ml-8 bg-gradient-to-br from-indigo-200 to-purple-100 via-cyan-100">
+    <div class="flex flex-row place-content-center mt-24">
+        <div class="ml-12 text-2xl font-extrabold text-center p-3 tracking-wide rounded-3xl border-4 border-indigo-800">Add a New Record to Your Vehicle</div>
     </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Mileage</label>
-        <input type="number" class="form-control" asp-for="Mileage">
-    </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Name</label>
-        <input type="text" class="form-control" asp-for="Name">
-    </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Notes</label>
-        <input type="text" class="form-control" asp-for="Notes">
-    </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Cost</label>
-        <input type="number" class="form-control" asp-for="Cost">
-    </div>
+    <form action="Create" method="post" class="max-w-md mx-auto mb-64 mt-14">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="date" asp-for="Date" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Date</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="number" asp-for="Mileage" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mileage</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="text" asp-for="Name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+        </div>
 
-    <div class="mb-3">
-        <label for="" class="form-label">Category</label>
-        <select asp-for="CategoryId" class="form-control" asp-items="@Model.Categories"></select>
-        @*         <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(category))"></select> *@
-    </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <textarea type="text" asp-for="Notes" rows="2" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " ></textarea>
+            <label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Notes</label>
+        </div>
 
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="number" asp-for="Cost" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Cost</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <label for="underline_select" class="text-sm text-gray-500 underline underline-offset-2">Category</label>
+            <select asp-for="CategoryId" asp-items="@Model.Categories" id="underline_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"></select>
+        </div>
 
-
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-
-<div>
-    <a asp-controller="Records" asp-action="Index" asp-route-id="@carid">Back to List</a>
-</div>
+        <div class="mt-1">
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+            <a asp-controller="Records" asp-action="Index" asp-route-id="@carid" class="ml-52 text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Back to Garage</a>
+        </div>
+    </form>
+</body>
+</html>
 
 @section Scripts {
     @{

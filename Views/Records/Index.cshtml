@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<VehicleTracker.Models.Records>
 
-
 @{
     ViewData["Title"] = "Index";
     var carid = ViewBag.carId;
     var CarID = Context.Session.GetInt32("carid");
     var notes = Context.Session.GetString("VehicleNotes");
+    var cost = Context.Session.GetString("TotalCost");
 }
 <html>
 <body class="ml-8 bg-gradient-to-br from-indigo-200 to-purple-100 via-cyan-100">
@@ -17,11 +17,15 @@
                     <div class="h-12 mt-2">
                         <a class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2"asp-controller="Vehicle" asp-action="Index">Back to garage</a>
                     </div>
-                        <div class="h-18 mb-4">
-                            <h1 class="text-center font-extrabold text-4xl">Service Records</h1>
+                        <div class="h-18 mb-1">
+                            <h1 class="text-center font-extrabold text-4xl p-3 tracking-wide rounded-3xl border-4 border-indigo-800">Service Records</h1>
                         </div>
-                    <div class="h-14 ml-28">
-                        <a class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2" asp-controller="Records" asp-action="Create" asp-route-id="@CarID">Create New</a>
+                    <div class="h-12 ml-36">
+                        <form>
+                            <button asp-controller="Records" asp-action="Create" asp-route-id="@CarID" class="inline-flex items-center justify-center w-10 h-10 mr-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -30,7 +34,7 @@
                     <div class="h-6">
                         <h1 class="text-center text-lg underline underline-offset-4">Vehicle's Notes</h1>
                     </div>
-                    <div class="h-28 ">@notes</div>
+                        <p class="h-28 w-fit mt-2 mx-20 self-center whitespace-pre">@notes</p>
                     <div class="h-10 self-end mr-12">
                         <a class="text-left" asp-controller="Vehicle" asp-action="EditNotes" asp-route-id="@CarID"><h1 class="underline underline-offset-"> Edit</h1></a>
                     </div>
@@ -57,14 +61,17 @@
                     </div>
                 </form>
             </div>
+                <div class="ml-12 self-center">
+                    <a class="underline underline-offset-4 mr-1">Total cost:</a> @cost
+            </div>
         </div>
     </div>
     <div class="">
         <div class="flex flex-row">
-            <div class="w-40 mr-4">
+                <div class="w-40 mr-4 mb-56">
                 <div class="flex flex-col mt-14">
                     <div>
-                        <h1 class="text-center text-base underline ">Sort by category:</h1>
+                        <h1 class="text-center text-base underline underline-offset-4">Sort by category:</h1>
                     </div>
                     <div class="text-center pt-4 mb-4">
                         <a class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2" asp-controller="Records" asp-action="Index" asp-route-id="@CarID" asp-route-category="1">Maintenance</a>
@@ -83,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="">
+            <div class="mb-56">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-1 mt-3">
                     <table class="table-auto w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
                         <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
@@ -152,8 +159,9 @@
                                     }
                                 </td>
                                 <td class="px-6 py-4">
-                                            <a asp-action="Edit" asp-route-id="@item.Id" asp-route-id="@item.VehicleId" class="font-medium text-gray-800 hover:underline">Edit</a>
-                                            <a asp-action="Delete" asp-route-id="@item.Id" class="font-medium text-gray-800 hover:underline">Delete</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-id="@item.VehicleId" class="font-medium text-gray-800 hover:underline">Edit</a>
+                                    <a class="text-gray-800"> | </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="font-medium text-gray-800 hover:underline">Delete</a>
                                 </td>
                             </tr>
                             }
@@ -165,6 +173,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
